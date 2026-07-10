@@ -1,29 +1,49 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Speakora — Access Restricted</title>
-  <style>
-    :root { color-scheme: light dark; }
-    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; }
-    main { max-width: 720px; padding: 4rem 1.25rem; margin: 0 auto; }
-    h1 { font-size: 2rem; margin-bottom: 0.5rem; }
-    p { font-size: 1.05rem; }
-    .card { border-radius: 14px; padding: 2rem; border: 1px solid rgba(0,0,0,.08); }
-    footer { margin-top: 2rem; font-size: .9rem; opacity: .7; }
-    a { text-decoration: none; }
-    a:hover { text-decoration: underline; }
-  </style>
+  <title>Centre d'aide — Speakora</title>
+  <meta name="description" content="Guides d'utilisation de Speakora : application mobile pour éducatrices et portail d'administration pour les CPE.">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <main>
-    <div class="card">
-      <h1>Access Restricted</h1>
-      <p>Only approved users are able to use the app.</p>
-      <p>To request access, please contact <a href="mailto:it@speakora.ca">it@speakora.ca</a>.</p>
-    </div>
-    <footer>&copy; 2025 Speakora Inc.</footer>
-  </main>
+  <header>
+    <nav>
+      <a class="logo" href="/">
+        <img src="logo-full.svg" alt="Speakora">
+      </a>
+      <div class="header-links">
+        <a href="https://www.speakora.ca">speakora.ca</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Centre d'aide Speakora</h1>
+    <p>Tout ce qu'il faut savoir pour utiliser Speakora au quotidien — de l'enregistrement des observations jusqu'à l'envoi des rapports aux parents.</p>
+  </section>
+
+  <section class="guide-cards">
+    <a class="guide-card" href="guide-educatrice/">
+      <div class="card-icon">🎙️</div>
+      <h2>Guide de l'éducatrice</h2>
+      <p>L'application mobile : enregistrer des observations par la voix, les consulter et suivre le développement des enfants de votre groupe.</p>
+    </a>
+    <a class="guide-card" href="guide-administration/">
+      <div class="card-icon">🗂️</div>
+      <h2>Guide de l'administration</h2>
+      <p>Le portail web : gérer les enfants et les groupes, générer et finaliser les rapports de développement, et les envoyer aux parents.</p>
+    </a>
+  </section>
+
+  <section class="contact-section">
+    <h2>Besoin d'aide?</h2>
+    <p>L'accès à l'application Speakora est réservé aux utilisateurs approuvés. Pour demander un accès, pour toute question ou tout problème technique, écrivez-nous à <a href="mailto:it@speakora.ca">it@speakora.ca</a>.</p>
+  </section>
+
+  <footer>
+    &copy; 2026 Speakora Inc. · <a href="https://www.speakora.ca/politique-de-confidentialite">Politique de confidentialité</a>
+  </footer>
 </body>
 </html>

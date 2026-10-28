@@ -69,7 +69,7 @@
     <ol class="steps">
       <li>Ouvrez la section <span class="ui">Code QR</span> du menu.</li>
       <li>Cliquez sur le bouton d'impression pour obtenir la version imprimable, puis affichez-la à l'entrée du CPE ou remettez-la aux parents.</li>
-      <li>Les parents scannent le code avec leur téléphone et remplissent le formulaire d'inscription de leur enfant.</li>
+      <li>Les parents scannent le code avec leur téléphone et remplissent le formulaire d'inscription de leur enfant : nom, date de naissance, <span class="ui">date d'entrée à la garderie</span> (<span class="ui">Fréquente depuis</span>) et coordonnées des parents.</li>
       <li>L'enfant apparaît ensuite dans la section <span class="ui">Enfants</span>, sous l'onglet <span class="ui">En attente d'approbation</span>. Approuvez l'inscription (<span class="ui">Approuver l'inscription</span>) : l'enfant devient actif, prêt à être placé dans un groupe.</li>
     </ol>
     <figure class="screenshot">
@@ -81,7 +81,7 @@
     <h2 id="enfants">4. Gérer les enfants</h2>
     <p>La section <span class="ui">Enfants</span> liste tous les enfants du CPE. Cliquez sur un enfant pour ouvrir sa fiche, organisée en onglets :</p>
     <ul>
-      <li><span class="ui">Aperçu</span> — les informations de l'enfant, dont le groupe d'âge et les courriels des parents (<span class="ui">Courriel du parent</span> et <span class="ui">Courriel du 2e parent</span>). Ces courriels servent à l'envoi des rapports : assurez-vous qu'ils sont exacts.</li>
+      <li><span class="ui">Aperçu</span> — les informations de l'enfant : le groupe d'âge, la date d'entrée (<span class="ui">Fréquente depuis</span>, remplie par le parent à l'inscription et modifiable ici) et les courriels des parents (<span class="ui">Courriel du parent</span> et <span class="ui">Courriel du 2e parent</span>). Ces courriels servent à l'envoi des rapports : assurez-vous qu'ils sont exacts.</li>
       <li><span class="ui">Rapports</span> — ses rapports de développement, en brouillon ou finalisés (voir la section 6).</li>
       <li><span class="ui">Observations</span> — les observations enregistrées par les éducatrices.</li>
       <li><span class="ui">Grille de développement</span> — la grille de développement de l'enfant.</li>
@@ -146,7 +146,7 @@
     </figure>
 
     <h2 id="equipe">8. Gérer l'équipe</h2>
-    <p>La section <span class="ui">Équipe</span> (visible pour les propriétaires et administrateurs) liste le personnel du CPE. C'est ici que vous donnez accès à l'application à une nouvelle éducatrice et que se définit le nom de l'<span class="ui">Établissement</span> affiché sur les rapports envoyés aux parents.</p>
+    <p>La section <span class="ui">Équipe</span> (visible pour les propriétaires et administrateurs, qui peuvent tous deux y gérer l'équipe) liste le personnel du CPE. C'est ici que vous donnez accès à l'application à une nouvelle éducatrice et que se définit le nom de l'<span class="ui">Établissement</span> affiché sur les rapports envoyés aux parents.</p>
     <h3>Inviter une éducatrice ou un administrateur</h3>
     <ol class="steps">
       <li>Cliquez sur <span class="ui">Ajouter un membre</span>, entrez l'adresse courriel de la personne et choisissez son <span class="ui">Rôle</span> (<span class="ui">Éducateur(trice)</span> ou <span class="ui">Admin</span>), puis cliquez sur <span class="ui">Ajouter</span>.</li>
@@ -155,11 +155,11 @@
     </ol>
     <h3>Qui peut faire quoi dans cette section</h3>
     <ul>
-      <li><strong>Propriétaire et admin</strong> — consulter la liste des membres (onglets <span class="ui">Actifs</span> et <span class="ui">En attente</span>) et modifier le nom de l'<span class="ui">Établissement</span>.</li>
-      <li><strong>Propriétaire seulement</strong> — <span class="ui">Ajouter un membre</span>, <span class="ui">Changer le rôle</span> d'un membre (<span class="ui">Éducateur(trice)</span> ou <span class="ui">Admin</span>) et <span class="ui">Retirer le membre</span>, y compris les invitations en attente.</li>
+      <li><strong>Propriétaire et admin</strong> — tout : consulter la liste des membres (onglets <span class="ui">Actifs</span> et <span class="ui">En attente</span>), <span class="ui">Ajouter un membre</span>, <span class="ui">Changer le rôle</span> d'un membre (<span class="ui">Éducateur(trice)</span> ou <span class="ui">Admin</span>), <span class="ui">Retirer le membre</span> (y compris les invitations en attente) et modifier le nom de l'<span class="ui">Établissement</span>.</li>
       <li><strong>Éducatrice</strong> — n'a pas accès à cette section.</li>
     </ul>
-    <div class="tip">💡 Garde-fou : le dernier membre ayant le rôle <span class="ui">Admin</span> ne peut être ni retiré ni rétrogradé en éducatrice, même par le propriétaire. Changez d'abord le rôle d'un autre membre pour Admin, puis refaites l'opération.</div>
+    <div class="tip">💡 Personne — ni un propriétaire ni un admin — ne peut modifier ou retirer la fiche d'un <strong>propriétaire</strong>. Le rôle Propriétaire ne s'attribue pas depuis cette section : il revient à la personne qui a créé le compte du CPE.</div>
+    <div class="tip">💡 Garde-fou : le dernier <strong>gestionnaire de l'équipe</strong> (admin ou propriétaire) ne peut être ni retiré ni rétrogradé. Pour débloquer la situation, donnez d'abord le rôle Admin à un autre membre, puis refaites l'opération.</div>
     <figure class="screenshot">
       <img src="../images/admin-equipe.png" alt="Gestion de l'équipe" onerror="this.style.display='none'; this.parentElement.classList.add('placeholder')">
       <figcaption>La gestion de l'équipe</figcaption>

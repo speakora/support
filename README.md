@@ -55,16 +55,22 @@ KID_ID=<enfant démo> REPORT_ID=<rapport brouillon de cet enfant> \
 Sans `EDUC_EMAIL`, la passe est sautée et les `educ-*.png` existantes sont
 conservées.
 
-**Après chaque capture**, refaire les retouches avant de publier (le script
-écrase les images retouchées à chaque exécution) :
+**Confidentialité : le masquage est automatique.** Avant chaque capture, le
+script remplace tout ce qui ressemble à une adresse courriel par un bloc plein
+(`maskSensitiveData` dans `screenshots.mjs`). Il n'y a donc plus rien à flouter
+à la main pour `admin-equipe.png`, et le masquage couvre aussi le courriel du
+parent dans les inscriptions en attente et le bloc destinataires du dialogue
+d'envoi. Le masquage porte sur les nœuds texte, par motif — pas sur des
+sélecteurs CSS — pour ne pas dépendre de la mise en page de chaque page.
 
-- `admin-equipe.png` — flouter les courriels (colonne Courriel);
-- `admin-envoi-dialogue.png` et `admin-envoi.png` — flouter le courriel du
-  destinataire (ces deux captures se prennent depuis la page d'un rapport
-  envoyé : dialogue « Envoyer aux parents » sans confirmer, puis « Voir le
-  courriel envoyé »);
-- `admin-parametres.png` — cercle rouge autour de l'icône de profil en haut
-  à droite.
+Deux captures échappent encore au script :
+
+- `admin-envoi-dialogue.png` et `admin-envoi.png` — se prennent depuis la page
+  d'un rapport **envoyé** : dialogue « Envoyer aux parents » sans confirmer,
+  puis « Voir le courriel envoyé ». Masquer le courriel du destinataire avant
+  de publier.
+- `admin-parametres.png` — ajouter le cercle rouge autour de l'icône de profil
+  en haut à droite.
 
 ### Application mobile (émulateur + adb)
 

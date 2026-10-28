@@ -79,13 +79,91 @@ async function login(page, email, password) {
   await page.waitForURL('**/dashboard**', { timeout: 30_000 });
 }
 
+// ---------------------------------------------------------------------------
+// Confidentialité : masquage automatique des données personnelles.
+//
+// Avant chaque capture, on remplace dans le DOM tout ce qui ressemble à une
+// adresse courriel par un rectangle plein. On masque par motif (et non par
+// sélecteur CSS) parce que les courriels apparaissent à plusieurs endroits :
+// colonne de la section Équipe, invitations en attente, courriel du parent
+// dans la liste des inscriptions en attente, et bloc destinataires du dialogue
+// d'envoi. Un sélecteur par page en oublierait forcément un.
+//
+// Le remplacement se fait sur les nœuds texte (feuilles), pas sur innerHTML :
+// cela préserve la structure React et évite de casser la mise en page.
+// ---------------------------------------------------------------------------
+const EMAIL_RE = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g;
+const REDACTED = '••••••@••••••';
+
+async function maskSensitiveData(page) {
+  const masked = await page.evaluate(
+    ({ pattern, replacement }) => {
+      const re = new RegExp(pattern, 'g');
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+
+      // On collecte d'abord : modifier le DOM pendant le parcours fausse le
+      // TreeWalker.
+      const targets = [];
+      let node = walker.nextNode();
+      while (node) {
+        if (re.test(node.nodeValue)) targets.push(node);
+        re.lastIndex = 0;
+        node = walker.nextNode();
+      }
+
+      // Remplacement par un <span> opaque plutôt que par du texte : les points
+      // de suspension se lisaient comme un simple encadré pointillé, alors que
+      // ce bloc plein ne laisse deviner ni la longueur ni la forme de l'adresse.
+      for (const textNode of targets) {
+        const frag = document.createDocumentFragment();
+        let last = 0;
+        const text = textNode.nodeValue;
+
+        re.lastIndex = 0;
+        let match = re.exec(text);
+        while (match) {
+          if (match.index > last) {
+            frag.appendChild(document.createTextNode(text.slice(last, match.index)));
+          }
+          const block = document.createElement('span');
+          block.textContent = replacement;
+          block.style.cssText = [
+            'background:#2b2b2b',
+            'color:#2b2b2b',
+            'border-radius:3px',
+            'padding:1px 4px',
+            'user-select:none',
+          ].join(';');
+          frag.appendChild(block);
+          last = match.index + match[0].length;
+          match = re.exec(text);
+        }
+
+        if (last < text.length) {
+          frag.appendChild(document.createTextNode(text.slice(last)));
+        }
+        textNode.parentNode?.replaceChild(frag, textNode);
+      }
+      return targets.length;
+    },
+    { pattern: EMAIL_RE.source, replacement: REDACTED }
+  );
+
+  return masked;
+}
+
 // 2 essais : juste après la connexion, la première navigation peut être
 // interrompue par la redirection de l'app (net::ERR_ABORTED).
-async function capture(name, fn) {
+//
+// Le masquage fait partie du chemin de capture : impossible d'oublier une
+// image, contrairement à la retouche manuelle qu'il remplace.
+async function capture(page, name, fn) {
   for (let attempt = 1; attempt <= 2; attempt += 1) {
     try {
       await fn();
       await new Promise((r) => setTimeout(r, 800)); // laisse finir animations/chargements
+      const count = await maskSensitiveData(page);
+      if (count > 0) console.log(`  masqué ${count} courriel(s) dans ${name}`);
       return true;
     } catch (err) {
       if (attempt === 2) {
@@ -111,6 +189,7 @@ const page = await newFrenchPage();
 await page.goto(`${ADMIN_URL}/auth/auth0/sign-up`, { waitUntil: 'networkidle' });
 await page.goto(`${ADMIN_URL}/auth/auth0/sign-up`, { waitUntil: 'networkidle' });
 await page.waitForTimeout(800);
+await maskSensitiveData(page);
 await page.screenshot({ path: imagePath('admin-inscription') });
 console.log('✓ admin-inscription.png');
 
@@ -119,7 +198,7 @@ await login(page, EMAIL, PASSWORD);
 console.log('Connecté.');
 
 for (const shot of SHOTS) {
-  const ok = await capture(shot.name, async () => {
+  const ok = await capture(page, shot.name, async () => {
     await page.goto(`${ADMIN_URL}${shot.path}`, { waitUntil: 'networkidle' });
   });
   if (ok) {
@@ -127,6 +206,23 @@ for (const shot of SHOTS) {
     console.log(`✓ ${shot.name}.png`);
   }
 }
+
+// Fiche d'un enfant, onglet Rapports : pas adressable sans identifiant, donc
+// capturée seulement si KID_ID est fourni.
+if (KID_ID) {
+  const ok = await capture(page, 'admin-enfant-rapports', async () => {
+    await page.goto(`${ADMIN_URL}/dashboard/kids/${KID_ID}?tab=reports`, {
+      waitUntil: 'networkidle',
+    });
+  });
+  if (ok) {
+    await page.screenshot({ path: imagePath('admin-enfant-rapports') });
+    console.log('✓ admin-enfant-rapports.png');
+  }
+} else {
+  console.log('KID_ID absent : admin-enfant-rapports sautée.');
+}
+
 await page.close();
 
 // ---------------------------------------------------------------------------
@@ -139,7 +235,7 @@ if (EDUC_EMAIL && EDUC_PASSWORD) {
   await login(educ, EDUC_EMAIL, EDUC_PASSWORD);
   console.log('Connectée.');
 
-  if (await capture('educ-dashboard', async () => {
+  if (await capture(educ, 'educ-dashboard', async () => {
     await educ.goto(`${ADMIN_URL}/dashboard`, { waitUntil: 'networkidle' });
   })) {
     await educ.screenshot({ path: imagePath('educ-dashboard') });
@@ -147,7 +243,7 @@ if (EDUC_EMAIL && EDUC_PASSWORD) {
   }
 
   if (KID_ID) {
-    if (await capture('educ-grille', async () => {
+    if (await capture(educ, 'educ-grille', async () => {
       await educ.goto(`${ADMIN_URL}/dashboard/kids/${KID_ID}?tab=grille`, { waitUntil: 'networkidle' });
     })) {
       await educ.screenshot({ path: imagePath('educ-grille') });
@@ -156,7 +252,7 @@ if (EDUC_EMAIL && EDUC_PASSWORD) {
 
     // Dialogue « Générer un rapport de développement » : ouvert depuis
     // l'onglet Rapports, capturé, puis refermé avec Échap.
-    if (await capture('educ-generer', async () => {
+    if (await capture(educ, 'educ-generer', async () => {
       await educ.goto(`${ADMIN_URL}/dashboard/kids/${KID_ID}?tab=reports`, { waitUntil: 'networkidle' });
       await educ.getByRole('button', { name: 'Générer un rapport' }).first().click();
       await educ.getByRole('dialog').waitFor();
@@ -171,7 +267,7 @@ if (EDUC_EMAIL && EDUC_PASSWORD) {
 
   if (KID_ID && REPORT_ID) {
     // L'onglet Modifier du rapport n'est pas adressable par URL : on clique.
-    if (await capture('educ-modifier', async () => {
+    if (await capture(educ, 'educ-modifier', async () => {
       await educ.goto(`${ADMIN_URL}/dashboard/kids/${KID_ID}/reports/${REPORT_ID}`, { waitUntil: 'networkidle' });
       await educ.getByRole('tab', { name: 'Modifier' }).click();
     })) {

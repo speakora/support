@@ -33,18 +33,51 @@ Utiliser un compte de démo dont les données peuvent apparaître publiquement
 (preuve d'envoi) se fait à la main depuis
 `/dashboard/print/sent-email/<reportId>` d'un rapport envoyé.
 
-**Après chaque capture** : flouter les courriels visibles dans
-`admin-equipe.png` (colonne Courriel) avant de publier — le script écrase
-l'image floutée à chaque exécution.
+#### Vue éducatrice (`educ-*.png`, guide de l'éducatrice)
 
-### Application mobile (manuel)
+Le guide de l'éducatrice montre le portail vu par le rôle **éducateur**
+(menu sans Équipe/Code QR). Ajouter au même appel :
 
-Depuis un émulateur ou un téléphone, capturer et déposer dans `images/` :
+```bash
+EDUC_EMAIL=... EDUC_PASSWORD=... \
+KID_ID=<enfant démo> REPORT_ID=<rapport brouillon de cet enfant> \
+```
 
-- `app-connexion.png` — écran de connexion
-- `app-mes-enfants.png` — liste « Mes enfants »
-- `app-enregistrement.png` — écran d'enregistrement (transcription en direct)
-- `app-observations.png` — observations d'un enfant avec filtres
+- `EDUC_EMAIL`/`EDUC_PASSWORD` : compte démo avec le rôle éducateur (à créer
+  une fois depuis le compte admin : Équipe → Ajouter un membre, rôle
+  Éducateur(trice), puis compléter l'inscription depuis le courriel
+  d'invitation). Ses données doivent aussi pouvoir apparaître publiquement.
+- `KID_ID` : un enfant de démo avec observations et grille remplies
+  (captures `educ-grille.png` et `educ-generer.png`).
+- `REPORT_ID` : un rapport **brouillon** de cet enfant (capture
+  `educ-modifier.png`).
+
+Sans `EDUC_EMAIL`, la passe est sautée et les `educ-*.png` existantes sont
+conservées.
+
+**Après chaque capture**, refaire les retouches avant de publier (le script
+écrase les images retouchées à chaque exécution) :
+
+- `admin-equipe.png` — flouter les courriels (colonne Courriel);
+- `admin-envoi-dialogue.png` et `admin-envoi.png` — flouter le courriel du
+  destinataire (ces deux captures se prennent depuis la page d'un rapport
+  envoyé : dialogue « Envoyer aux parents » sans confirmer, puis « Voir le
+  courriel envoyé »);
+- `admin-parametres.png` — cercle rouge autour de l'icône de profil en haut
+  à droite.
+
+### Application mobile (émulateur + adb)
+
+Lancer un émulateur (`flutter emulators --launch Pixel_8_API_35`), puis
+`flutter run` dans `speakora_FE`, se connecter au compte démo et capturer
+avec `adb exec-out screencap -p > images/<nom>.png` :
+
+- `app-connexion.png` — écran de connexion (formulaire Login)
+- `app-mes-enfants.png` — liste des enfants du groupe
+- `app-enregistrement.png` — enregistrement en cours (bouton d'arrêt rouge);
+  déclencher l'enregistrement sur un enfant de test, puis **supprimer
+  l'observation parasite** créée en l'arrêtant
+- `app-observations.png` — observations d'un enfant avec filtres et statuts
 
 ## Règle d'entretien
 

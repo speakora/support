@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Guide de l'éducatrice — Speakora</title>
-  <meta name="description" content="Comment utiliser l'application mobile Speakora pour enregistrer des observations par la voix.">
+  <meta name="description" content="Comment utiliser Speakora comme éducatrice : rédiger et soumettre les rapports de développement sur le portail web, et enregistrer des observations par la voix avec l'application mobile.">
   <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
@@ -23,12 +23,24 @@
     <p class="breadcrumb"><a href="../">← Centre d'aide</a></p>
 
     <h1>Guide de l'éducatrice</h1>
-    <p class="subtitle">L'application mobile Speakora — observer, parler, c'est noté.</p>
+    <p class="subtitle">Le portail web et l'application mobile — observer, rédiger, soumettre.</p>
+
+    <p>Speakora s'utilise à deux endroits. Le <strong>portail web</strong> est votre outil principal : c'est là que vous suivez vos enfants, remplissez la grille de développement, puis générez, modifiez et soumettez leurs rapports à la direction. L'<strong>application mobile</strong> est facultative : elle sert à noter des observations par la voix, sur le vif — mais un rapport complet peut se faire sans jamais l'ouvrir.</p>
 
     <nav class="toc">
-      <strong>Dans ce guide</strong>
+      <strong>Partie 1 — Sur le portail web</strong>
       <ol>
-        <li><a href="#connexion">Se connecter</a></li>
+        <li><a href="#compte">Créer votre compte</a></li>
+        <li><a href="#portail">Se connecter au portail</a></li>
+        <li><a href="#enfants">Vos enfants et vos groupes</a></li>
+        <li><a href="#grille">Remplir la grille de développement</a></li>
+        <li><a href="#generer">Générer un rapport</a></li>
+        <li><a href="#modifier">Modifier le rapport</a></li>
+        <li><a href="#reviser">Envoyer le rapport en révision</a></li>
+      </ol>
+      <strong>Partie 2 — L'application mobile (facultative)</strong>
+      <ol start="8">
+        <li><a href="#connexion">Se connecter à l'application</a></li>
         <li><a href="#mes-enfants">L'écran « Mes enfants »</a></li>
         <li><a href="#enregistrer">Enregistrer une observation</a></li>
         <li><a href="#consulter">Consulter et gérer les observations</a></li>
@@ -36,10 +48,95 @@
       </ol>
     </nav>
 
-    <h2 id="connexion">1. Se connecter</h2>
+    <h2 class="part">Partie 1 — Sur le portail web</h2>
+
+    <h2 id="compte">1. Créer votre compte</h2>
+    <p>Votre compte se crée <strong>dans le navigateur</strong>, à partir de l'invitation envoyée par votre direction — pas dans l'application mobile.</p>
+    <ol class="steps">
+      <li>Votre direction vous inscrit à Speakora : vous recevez par courriel une invitation à vous inscrire. Ouvrez le lien — le formulaire d'inscription s'affiche dans votre navigateur, votre adresse courriel déjà remplie.</li>
+      <li>Remplissez le formulaire : <span class="ui">Prénom</span>, <span class="ui">Nom</span>, <span class="ui">Nom d'utilisateur</span> (lettres seulement, 3 à 20 caractères) et <span class="ui">Mot de passe</span> (au moins 8 caractères, dont une majuscule, une minuscule et un chiffre), puis cliquez sur <span class="ui">Créer un compte</span>.</li>
+      <li>Ouvrez ensuite le courriel de vérification qui vous est envoyé et cliquez sur le lien (valide 24 heures) : votre compte est activé et rattaché à votre CPE.</li>
+    </ol>
+    <figure class="screenshot">
+      <img src="../images/admin-inscription.png" alt="Formulaire d'inscription dans le navigateur" onerror="this.style.display='none'; this.parentElement.classList.add('placeholder')">
+      <figcaption>Le formulaire d'inscription, dans le navigateur</figcaption>
+    </figure>
+    <div class="warn">⚠️ L'application mobile propose aussi un bouton d'inscription (<span class="ui">Sign Up</span>), mais créez plutôt votre compte depuis le lien d'invitation : il vous rattache automatiquement à votre CPE avec le bon rôle.</div>
+
+    <h2 id="portail">2. Se connecter au portail</h2>
+    <ol class="steps">
+      <li>Dans votre navigateur, rendez-vous sur <a href="https://admin.speakora.ca">admin.speakora.ca</a>.</li>
+      <li>Entrez le courriel et le mot de passe de votre compte (créé à la section 1), puis connectez-vous. Vous arrivez sur le <span class="ui">Tableau de bord</span>.</li>
+    </ol>
+    <p>Le menu de gauche vous donne accès à quatre sections : <span class="ui">Tableau de bord</span>, <span class="ui">Enfants</span>, <span class="ui">Groupes</span> et <span class="ui">Tous les rapports</span>.</p>
+    <figure class="screenshot">
+      <img src="../images/educ-dashboard.png" alt="Tableau de bord du portail, vu par une éducatrice" onerror="this.style.display='none'; this.parentElement.classList.add('placeholder')">
+      <figcaption>Le tableau de bord, vu par une éducatrice</figcaption>
+    </figure>
+    <div class="tip">💡 Les sections <span class="ui">Équipe</span> et <span class="ui">Code QR</span> n'apparaissent pas dans votre menu : elles sont réservées à la direction. C'est normal.</div>
+
+    <h2 id="enfants">3. Vos enfants et vos groupes</h2>
+    <p>La section <span class="ui">Enfants</span> liste les enfants de votre CPE. Cliquez sur un enfant pour ouvrir sa fiche, organisée en quatre onglets :</p>
+    <ul>
+      <li><span class="ui">Aperçu</span> — ses renseignements (nom, groupe, contacts des parents…);</li>
+      <li><span class="ui">Rapports</span> — ses rapports de développement, brouillons et finalisés;</li>
+      <li><span class="ui">Observations</span> — toutes les observations enregistrées pour cet enfant;</li>
+      <li><span class="ui">Grille de développement</span> — la grille à cocher qui alimente ses rapports.</li>
+    </ul>
+    <p>La section <span class="ui">Groupes</span> montre les groupes du CPE et l'éducatrice assignée à chacun.</p>
+    <figure class="screenshot">
+      <img src="../images/admin-enfants.png" alt="La liste des enfants dans le portail" onerror="this.style.display='none'; this.parentElement.classList.add('placeholder')">
+      <figcaption>La section Enfants</figcaption>
+    </figure>
+
+    <h2 id="grille">4. Remplir la grille de développement</h2>
+    <p>Dans la fiche de l'enfant, l'onglet <span class="ui">Grille de développement</span> présente la grille du groupe d'âge de l'enfant. Cochez les éléments observés au fil de la période, puis enregistrez : ces éléments alimentent directement le rapport — notamment la section <span class="ui">Objectifs et orientations</span>, qui se gère depuis cette grille.</p>
+    <figure class="screenshot">
+      <img src="../images/educ-grille.png" alt="La grille de développement d'un enfant" onerror="this.style.display='none'; this.parentElement.classList.add('placeholder')">
+      <figcaption>La grille de développement d'un enfant</figcaption>
+    </figure>
+    <div class="tip">💡 Quand un enfant change de groupe d'âge, le portail vous propose de copier les données de son ancienne grille dans la nouvelle — vous ne repartez pas de zéro.</div>
+
+    <h2 id="generer">5. Générer un rapport</h2>
+    <p>Le rapport de développement se construit à partir de vos observations et de la grille. C'est vous qui le générez, au moment du bilan périodique.</p>
+    <ol class="steps">
+      <li>Dans la fiche de l'enfant, ouvrez l'onglet <span class="ui">Rapports</span> et cliquez sur <span class="ui">Générer un rapport</span>.</li>
+      <li>Dans la fenêtre <span class="ui">Générer un rapport de développement</span>, choisissez la période couverte (les trois derniers mois par défaut). La fenêtre indique combien d'<span class="ui">observations</span> et d'<span class="ui">éléments cochés dans la grille</span> se trouvent dans cette période.</li>
+      <li>Cliquez sur <span class="ui">Générer un rapport</span>. Après quelques instants, le rapport s'ouvre — c'est un <span class="ui">Brouillon</span> : rien n'est encore envoyé.</li>
+    </ol>
+    <figure class="screenshot">
+      <img src="../images/educ-generer.png" alt="La fenêtre de génération d'un rapport de développement" onerror="this.style.display='none'; this.parentElement.classList.add('placeholder')">
+      <figcaption>La fenêtre « Générer un rapport de développement »</figcaption>
+    </figure>
+    <div class="tip">💡 Si la période contient peu d'observations, le portail vous en avertit avant de générer : le rapport sera plus riche si la grille est remplie et les observations nombreuses.</div>
+
+    <h2 id="modifier">6. Modifier le rapport</h2>
+    <p>Le rapport s'affiche avec deux onglets : <span class="ui">Aperçu</span>, le rendu tel que les parents le recevront, et <span class="ui">Modifier</span>, où vous retravaillez chaque section.</p>
+    <ol class="steps">
+      <li>Ouvrez l'onglet <span class="ui">Modifier</span>. Chaque section montre le texte proposé par Speakora, que vous pouvez réécrire dans vos mots : le <span class="ui">Portrait global de l'enfant</span>, les quatre domaines (<span class="ui">Cognitif</span>, <span class="ui">Langagier</span>, <span class="ui">Socioaffectif</span>, <span class="ui">Moteur</span>), les <span class="ui">Objectifs et orientations</span>, puis <span class="ui">Forces principales</span>, <span class="ui">Prochaines étapes</span> et <span class="ui">Message aux parents</span>.</li>
+      <li>Cliquez sur <span class="ui">Enregistrer</span>, puis vérifiez le résultat dans l'onglet <span class="ui">Aperçu</span>. Répétez jusqu'à ce que le rapport vous convienne.</li>
+    </ol>
+    <figure class="screenshot">
+      <img src="../images/educ-modifier.png" alt="L'onglet Modifier d'un rapport, avec ses sections éditables" onerror="this.style.display='none'; this.parentElement.classList.add('placeholder')">
+      <figcaption>L'onglet Modifier : chaque section du rapport est retravaillable</figcaption>
+    </figure>
+    <div class="warn">⚠️ Si vous modifiez un rapport que la direction avait déjà approuvé, l'approbation est retirée automatiquement — la direction devra l'approuver de nouveau avant l'envoi aux parents.</div>
+
+    <h2 id="reviser">7. Envoyer le rapport en révision</h2>
+    <p>Quand le rapport est prêt, vous le soumettez à la direction en le finalisant. C'est elle qui l'approuve et l'envoie aux parents — pas vous.</p>
+    <ol class="steps">
+      <li>Cliquez sur <span class="ui">Finaliser</span> (au bas de l'aperçu ou dans l'onglet <span class="ui">Modifier</span>) et confirmez. Le rapport passe de <span class="ui">Brouillon</span> à <span class="ui">Finalisé</span> — prêt pour la révision par un admin.</li>
+      <li>La direction le révise, le marque <span class="ui">Approuvé par un admin</span>, puis l'envoie aux parents en pièce jointe PDF. Vous pouvez suivre son état (approbation, envoi, livraison) depuis la fiche de l'enfant ou la section <span class="ui">Tous les rapports</span>.</li>
+    </ol>
+    <div class="tip">💡 Besoin d'y retoucher après coup? Ouvrez le rapport et cliquez sur <span class="ui">Repasser en brouillon</span> : il redevient modifiable, et vous le finaliserez de nouveau.</div>
+    <div class="warn">⚠️ Une fois le rapport finalisé, les observations de la période sont <strong>verrouillées</strong> dans l'application mobile : elles restent visibles, mais ne peuvent plus être modifiées ni supprimées.</div>
+
+    <h2 class="part">Partie 2 — L'application mobile (facultative)</h2>
+
+    <h2 id="connexion">8. Se connecter à l'application</h2>
     <ol class="steps">
       <li>Ouvrez l'application Speakora sur votre téléphone.</li>
-      <li>Entrez le courriel et le mot de passe fournis par votre CPE, puis appuyez sur le bouton de connexion.</li>
+      <li>Entrez le courriel et le mot de passe de votre compte (créé à la section 1) — les mêmes identifiants que sur le portail —, puis appuyez sur le bouton de connexion.</li>
     </ol>
     <figure class="screenshot mobile">
       <img src="../images/app-connexion.png" alt="Écran de connexion de l'application mobile" onerror="this.style.display='none'; this.parentElement.classList.add('placeholder')">
@@ -47,60 +144,72 @@
     </figure>
     <div class="tip">💡 Vous restez connectée d'une journée à l'autre — pas besoin de vous reconnecter à chaque utilisation.</div>
 
-    <h2 id="mes-enfants">2. L'écran « Mes enfants »</h2>
-    <p>Après la connexion, vous arrivez sur la liste des enfants de votre groupe. Pour chaque enfant, vous voyez :</p>
+    <h2 id="mes-enfants">9. L'écran « Mes enfants »</h2>
+    <p>Après la connexion, vous arrivez sur la liste des enfants de votre groupe — son nom s'affiche en haut de l'écran. Pour chaque enfant, vous voyez :</p>
     <ul>
       <li>le <strong>nombre d'observations</strong> déjà enregistrées (la pastille à côté du nom);</li>
-      <li>les <strong>quatre boutons de catégorie</strong> pour lancer un enregistrement directement : <span class="ui">Cognitif</span>, <span class="ui">Langagier</span>, <span class="ui">Socioaffectif</span> et <span class="ui">Moteur</span>.</li>
+      <li>les <strong>quatre boutons ronds</strong>, un par catégorie de développement : le trophée (<span class="ui">Cognitif</span>), le micro (<span class="ui">Langagier</span>), le cœur (<span class="ui">Socioaffectif</span>) et l'haltère (<span class="ui">Moteur</span>). Chacun lance un enregistrement dans sa catégorie.</li>
     </ul>
     <figure class="screenshot mobile">
       <img src="../images/app-mes-enfants.png" alt="Liste des enfants du groupe avec les boutons de catégorie" onerror="this.style.display='none'; this.parentElement.classList.add('placeholder')">
       <figcaption>La liste « Mes enfants » avec les boutons d'enregistrement rapide</figcaption>
     </figure>
 
-    <h2 id="enregistrer">3. Enregistrer une observation</h2>
-    <p>C'est le cœur de Speakora : vous parlez, l'application transcrit et classe l'observation automatiquement.</p>
+    <h2 id="enregistrer">10. Enregistrer une observation</h2>
+    <p>C'est la force de l'application : vous parlez, Speakora transcrit et classe l'observation automatiquement — sans quitter la liste de vos enfants.</p>
     <ol class="steps">
-      <li>Appuyez sur le bouton de la catégorie qui correspond à ce que vous venez d'observer (par exemple <span class="ui">Langagier</span>), directement dans la liste ou depuis la fiche de l'enfant (<span class="ui">Appuyez pour enregistrer</span>).</li>
-      <li>Décrivez ce que vous avez observé, dans vos mots, comme si vous le racontiez à une collègue. La transcription s'affiche en direct à l'écran.</li>
-      <li>Appuyez de nouveau sur le bouton pour arrêter. L'observation est transcrite et <strong>sauvegardée automatiquement</strong> — il n'y a rien d'autre à faire.</li>
+      <li>Sur la ligne de l'enfant, appuyez sur le bouton de la catégorie qui correspond à ce que vous venez d'observer (par exemple le micro pour <span class="ui">Langagier</span>). Le bouton devient un bouton d'arrêt rouge et la ligne de l'enfant est mise en évidence.</li>
+      <li>Décrivez ce que vous avez observé, dans vos mots, comme si vous le racontiez à une collègue.</li>
+      <li>Appuyez de nouveau sur le bouton pour arrêter. Speakora transcrit votre voix et <strong>sauvegarde l'observation automatiquement</strong> — le compteur de l'enfant augmente de un, et il n'y a rien d'autre à faire.</li>
     </ol>
     <figure class="screenshot mobile">
-      <img src="../images/app-enregistrement.png" alt="Écran d'enregistrement avec la grille des quatre catégories et la transcription en direct" onerror="this.style.display='none'; this.parentElement.classList.add('placeholder')">
-      <figcaption>L'écran d'enregistrement avec la transcription en direct</figcaption>
+      <img src="../images/app-enregistrement.png" alt="Enregistrement en cours : le bouton de catégorie est devenu un bouton d'arrêt rouge" onerror="this.style.display='none'; this.parentElement.classList.add('placeholder')">
+      <figcaption>Enregistrement en cours : le bouton de la catégorie devient un bouton d'arrêt</figcaption>
     </figure>
-    <div class="warn">⚠️ Si vous tentez de quitter l'écran pendant un enregistrement, l'application vous demande de confirmer (<span class="ui">Enregistrement en cours… Voulez-vous vraiment quitter?</span>) pour éviter de perdre votre observation.</div>
+    <div class="warn">⚠️ Si vous tentez de quitter l'écran pendant un enregistrement, l'application vous demande de confirmer (<span class="ui">Un enregistrement est en cours. Voulez-vous vraiment quitter?</span>) pour éviter de perdre votre observation.</div>
 
-    <h2 id="consulter">4. Consulter et gérer les observations</h2>
+    <h2 id="consulter">11. Consulter et gérer les observations</h2>
     <p>Appuyez sur le nom d'un enfant pour voir toutes ses observations.</p>
     <ul>
-      <li><strong>Filtrer</strong> — utilisez les pastilles <span class="ui">Tous</span>, <span class="ui">Cognitif</span>, <span class="ui">Langagier</span>, <span class="ui">Socioaffectif</span> et <span class="ui">Moteur</span> pour n'afficher qu'une catégorie. Le nombre d'observations est indiqué sur chaque pastille.</li>
-      <li><strong>Changer le statut</strong> — chaque observation porte un statut de développement (par exemple <span class="ui">Acquis</span>) que vous pouvez ajuster directement sur la carte.</li>
-      <li><strong>Supprimer</strong> — appuyez sur <span class="ui">Supprimer l'observation</span> si vous vous êtes trompée. Attention : cette action est irréversible.</li>
+      <li><strong>Filtrer</strong> — utilisez la pastille <span class="ui">Tous</span> ou la pastille d'une catégorie (trophée, micro, cœur, haltère) pour n'afficher que celle-ci. Le nombre d'observations est indiqué sur chaque pastille.</li>
+      <li><strong>Changer le statut</strong> — chaque observation porte un statut de développement, <span class="ui">Acquis</span> ou <span class="ui">En émergence</span>. Pour le changer, ouvrez le menu <span class="ui">⋮</span> de la carte et choisissez <span class="ui">Marquer comme</span>.</li>
+      <li><strong>Supprimer</strong> — dans le même menu <span class="ui">⋮</span>, choisissez <span class="ui">Supprimer</span> si vous vous êtes trompée, puis confirmez. Attention : <span class="ui">Cette action est irréversible.</span></li>
     </ul>
     <figure class="screenshot mobile">
       <img src="../images/app-observations.png" alt="Liste des observations d'un enfant avec les filtres par catégorie" onerror="this.style.display='none'; this.parentElement.classList.add('placeholder')">
       <figcaption>Les observations d'un enfant, filtrables par catégorie</figcaption>
     </figure>
-    <div class="tip">🔒 Quand la direction finalise le rapport périodique d'un enfant, ses observations sont <strong>verrouillées</strong> : elles restent visibles, mais ne peuvent plus être modifiées ni supprimées.</div>
+    <div class="tip">🔒 Quand le rapport périodique d'un enfant est finalisé (voir la section 7), ses observations sont <strong>verrouillées</strong> : elles restent visibles, mais ne peuvent plus être modifiées ni supprimées.</div>
 
-    <h2 id="faq">5. Questions fréquentes</h2>
+    <h2 id="faq">12. Questions fréquentes</h2>
     <div class="faq">
+      <details>
+        <summary>Dois-je absolument utiliser l'application mobile?</summary>
+        <p>Non. La grille de développement et l'onglet <span class="ui">Modifier</span> du rapport permettent de produire un rapport complet sans jamais ouvrir l'application. Elle reste toutefois le moyen le plus rapide de noter une observation sur le vif, par la voix.</p>
+      </details>
+      <details>
+        <summary>Puis-je envoyer moi-même le rapport aux parents?</summary>
+        <p>Non. Une fois le rapport <span class="ui">Finalisé</span>, un administrateur doit le marquer <span class="ui">Approuvé par un admin</span> avant de pouvoir l'<span class="ui">Envoyer aux parents</span>. Si des changements sont demandés, cliquez sur <span class="ui">Repasser en brouillon</span>, retravaillez le rapport, puis finalisez-le de nouveau.</p>
+      </details>
+      <details>
+        <summary>Je ne vois pas les sections Équipe ou Code QR dans le portail.</summary>
+        <p>C'est normal : ces sections sont réservées aux administrateurs. Votre menu comprend <span class="ui">Tableau de bord</span>, <span class="ui">Enfants</span>, <span class="ui">Groupes</span> et <span class="ui">Tous les rapports</span>.</p>
+      </details>
       <details>
         <summary>Dois-je choisir la « bonne » catégorie avant de parler?</summary>
         <p>Choisissez celle qui vous semble la plus proche — c'est elle qui classe l'observation. Si vous vous trompez, vous pouvez supprimer l'observation et la réenregistrer dans la bonne catégorie.</p>
       </details>
       <details>
         <summary>Que se passe-t-il avec mes observations?</summary>
-        <p>Elles alimentent le rapport de développement périodique de l'enfant, que la direction génère et envoie aux parents depuis le portail d'administration.</p>
+        <p>Elles alimentent le rapport de développement périodique de l'enfant — celui que vous générez et modifiez sur le portail (sections 5 et 6), puis que la direction approuve et envoie aux parents.</p>
       </details>
       <details>
         <summary>Je ne peux plus modifier une observation, pourquoi?</summary>
-        <p>Le rapport de la période a probablement été finalisé par la direction. Les observations de la période sont alors verrouillées (mention <span class="ui">Observation verrouillée — rapport finalisé</span>).</p>
+        <p>Le rapport de la période a probablement été finalisé (voir la section 7). Les observations de la période sont alors verrouillées (mention <span class="ui">Observation verrouillée — rapport finalisé</span>). Pour les modifier, il faut d'abord repasser le rapport en brouillon.</p>
       </details>
       <details>
         <summary>Un enfant n'apparaît pas dans ma liste.</summary>
-        <p>La liste affiche les enfants des groupes qui vous sont assignés. Demandez à votre direction de vérifier le groupe de l'enfant dans le portail d'administration.</p>
+        <p>La liste affiche les enfants des groupes qui vous sont assignés. Demandez à votre direction de vérifier le groupe de l'enfant dans la section <span class="ui">Groupes</span> du portail.</p>
       </details>
     </div>
   </main>

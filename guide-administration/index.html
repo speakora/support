@@ -28,6 +28,7 @@
     <nav class="toc">
       <strong>Dans ce guide</strong>
       <ol>
+        <li><a href="#inscription">Créer votre compte</a></li>
         <li><a href="#connexion">Se connecter au portail</a></li>
         <li><a href="#qrcode">Inscrire les enfants avec le code QR</a></li>
         <li><a href="#enfants">Gérer les enfants</a></li>
@@ -40,9 +41,22 @@
       </ol>
     </nav>
 
-    <h2 id="connexion">1. Se connecter au portail</h2>
+    <h2 id="inscription">1. Créer votre compte</h2>
+    <p>Le compte Speakora de votre CPE se crée sur le portail web. La première personne à s'inscrire devient <strong>propriétaire</strong> de l'établissement; elle invite ensuite le reste de l'équipe depuis la section <span class="ui">Équipe</span> (voir la section 8).</p>
     <ol class="steps">
-      <li>Rendez-vous sur le portail d'administration Speakora dans votre navigateur.</li>
+      <li>Rendez-vous sur <a href="https://admin.speakora.ca">admin.speakora.ca</a> et cliquez sur <span class="ui">Commencer</span>, sous le formulaire de connexion.</li>
+      <li>Remplissez le formulaire <span class="ui">Commencer avec SPEAKORA</span> : <span class="ui">Prénom</span>, <span class="ui">Nom</span>, <span class="ui">Nom d'utilisateur</span> (lettres seulement, 3 à 20 caractères), <span class="ui">Adresse courriel</span> et <span class="ui">Mot de passe</span> (au moins 8 caractères, dont une majuscule, une minuscule et un chiffre), puis cliquez sur <span class="ui">Créer un compte</span>.</li>
+      <li>L'écran <span class="ui">Vérifiez votre courriel</span> confirme qu'un lien de vérification vous a été envoyé. Ouvrez ce courriel et cliquez sur le lien (valide 24 heures) : votre compte est activé et vous arrivez sur le tableau de bord.</li>
+    </ol>
+    <figure class="screenshot">
+      <img src="../images/admin-inscription.png" alt="Formulaire d'inscription du portail" onerror="this.style.display='none'; this.parentElement.classList.add('placeholder')">
+      <figcaption>Le formulaire d'inscription du portail</figcaption>
+    </figure>
+    <div class="tip">💡 Première chose à faire une fois connecté : donner son nom à votre <span class="ui">Établissement</span> dans la section <span class="ui">Équipe</span> — c'est ce nom qui apparaît sur les rapports envoyés aux parents.</div>
+
+    <h2 id="connexion">2. Se connecter au portail</h2>
+    <ol class="steps">
+      <li>Rendez-vous sur le portail d'administration Speakora : <a href="https://admin.speakora.ca">admin.speakora.ca</a>.</li>
       <li>Entrez votre courriel et votre mot de passe, puis connectez-vous. Le menu de gauche donne accès à toutes les sections : <span class="ui">Tableau de bord</span>, <span class="ui">Enfants</span>, <span class="ui">Groupes</span>, <span class="ui">Tous les rapports</span>, <span class="ui">Code QR</span> et <span class="ui">Équipe</span>.</li>
     </ol>
     <figure class="screenshot">
@@ -50,8 +64,8 @@
       <figcaption>Le tableau de bord, votre point de départ</figcaption>
     </figure>
 
-    <h2 id="qrcode">2. Inscrire les enfants avec le code QR</h2>
-    <p>Le moyen le plus simple d'inscrire les enfants : les parents remplissent eux-mêmes la fiche de leur enfant en scannant un code QR.</p>
+    <h2 id="qrcode">3. Inscrire les enfants avec le code QR</h2>
+    <p>L'inscription des enfants se fait par les parents : ils remplissent eux-mêmes la fiche de leur enfant en scannant un code QR.</p>
     <ol class="steps">
       <li>Ouvrez la section <span class="ui">Code QR</span> du menu.</li>
       <li>Cliquez sur le bouton d'impression pour obtenir la version imprimable, puis affichez-la à l'entrée du CPE ou remettez-la aux parents.</li>
@@ -64,12 +78,13 @@
     </figure>
     <div class="tip">💡 Cette section est visible uniquement pour les propriétaires et administrateurs du compte.</div>
 
-    <h2 id="enfants">3. Gérer les enfants</h2>
+    <h2 id="enfants">4. Gérer les enfants</h2>
     <p>La section <span class="ui">Enfants</span> liste tous les enfants du CPE. Cliquez sur un enfant pour ouvrir sa fiche, organisée en onglets :</p>
     <ul>
       <li><span class="ui">Aperçu</span> — les informations de l'enfant, dont le groupe d'âge et les courriels des parents (<span class="ui">Courriel du parent</span> et <span class="ui">Courriel du 2e parent</span>). Ces courriels servent à l'envoi des rapports : assurez-vous qu'ils sont exacts.</li>
-      <li><span class="ui">Groupe</span> — le groupe auquel l'enfant appartient.</li>
-      <li><span class="ui">Rapports</span> — l'historique de ses rapports de développement.</li>
+      <li><span class="ui">Rapports</span> — ses rapports de développement, en brouillon ou finalisés (voir la section 6).</li>
+      <li><span class="ui">Observations</span> — les observations enregistrées par les éducatrices.</li>
+      <li><span class="ui">Grille de développement</span> — la grille de développement de l'enfant.</li>
     </ul>
     <figure class="screenshot">
       <img src="../images/admin-enfants.png" alt="Liste des enfants" onerror="this.style.display='none'; this.parentElement.classList.add('placeholder')">
@@ -77,10 +92,10 @@
     </figure>
     <div class="warn">⚠️ Le bouton <span class="ui">Supprimer cet enfant</span> efface l'enfant <strong>et tout ce qui s'y rattache</strong> (observations, rapports, grille de développement). Une confirmation détaillée vous est demandée avant la suppression — cette action est irréversible.</div>
 
-    <h2 id="groupes">4. Organiser les groupes</h2>
+    <h2 id="groupes">5. Organiser les groupes</h2>
     <p>Les groupes relient les enfants à leurs éducatrices : chaque éducatrice voit dans son application mobile les enfants de ses groupes.</p>
     <ol class="steps">
-      <li>Ouvrez la section <span class="ui">Groupes</span> et cliquez sur <span class="ui">Créer un nouveau groupe</span>.</li>
+      <li>Ouvrez la section <span class="ui">Groupes</span> et cliquez sur <span class="ui">Créer un groupe</span>.</li>
       <li>Nommez le groupe (par exemple « Les papillons ») et ajoutez-y les enfants.</li>
       <li>Le nombre d'enfants s'affiche sur chaque groupe. Vous pouvez modifier la composition d'un groupe en tout temps, ou le supprimer avec <span class="ui">Supprimer le groupe</span> (les enfants ne sont pas supprimés, seulement le groupe).</li>
     </ol>
@@ -89,27 +104,37 @@
       <figcaption>La gestion des groupes</figcaption>
     </figure>
 
-    <h2 id="rapports">5. Générer et finaliser les rapports</h2>
-    <p>La section <span class="ui">Tous les rapports</span> permet de produire les <strong>rapports de développement périodiques</strong> — le « portrait » de l'enfant — à partir des observations enregistrées par les éducatrices.</p>
+    <h2 id="rapports">6. Générer et finaliser les rapports</h2>
+    <p>Les <strong>rapports de développement périodiques</strong> — le « portrait » de l'enfant — s'appuient sur les observations enregistrées par les éducatrices. En temps normal, c'est l'éducatrice qui génère, retravaille et finalise le rapport depuis le portail (voir le <a href="../guide-educatrice/">guide de l'éducatrice</a>); votre rôle est alors de réviser le rapport finalisé et de l'approuver. Vous pouvez aussi générer un rapport vous-même, depuis la fiche de l'enfant :</p>
     <ol class="steps">
-      <li>Ouvrez la section <span class="ui">Tous les rapports</span> et repérez l'enfant et la période voulus. Les onglets <span class="ui">Brouillons</span> et <span class="ui">Finalisés</span> et les filtres (nom, groupe, livraison, dates) vous permettent de retrouver rapidement un rapport.</li>
-      <li>Cliquez sur <span class="ui">Générer un rapport</span> : Speakora assemble les observations de la période en un rapport structuré (message <span class="ui">Rapport généré avec succès</span>).</li>
+      <li>Ouvrez la section <span class="ui">Enfants</span>, filtrez par groupe (<span class="ui">Filtrer par groupe</span>) et cliquez sur l'enfant voulu.</li>
+      <li>Dans sa fiche, ouvrez l'onglet <span class="ui">Rapports</span> et cliquez sur <span class="ui">Générer un rapport</span> : Speakora assemble les observations de la période en un rapport structuré (message <span class="ui">Rapport généré avec succès</span>).</li>
       <li>Ouvrez le rapport pour le relire et vérifier son contenu.</li>
-      <li>Quand le rapport vous convient, cliquez sur <span class="ui">Finaliser</span>. La finalisation verrouille les observations de la période dans l'application des éducatrices; vous pouvez repasser le rapport en brouillon à tout moment. Un administrateur peut ensuite le <span class="ui">Marquer comme approuvé</span> (mention <span class="ui">Approuvé par un admin</span>).</li>
+      <li>Quand le rapport vous convient, cliquez sur <span class="ui">Finaliser</span>. La finalisation verrouille les observations de la période dans l'application des éducatrices; vous pouvez repasser le rapport en brouillon à tout moment.</li>
+      <li>Sur le rapport finalisé, cliquez sur <span class="ui">Marquer comme approuvé</span> (mention <span class="ui">Approuvé par un admin</span>). Cette approbation — réservée aux administrateurs — est <strong>obligatoire avant l'envoi aux parents</strong>; toute modification apportée au rapport après coup la retire, et il faudra approuver de nouveau.</li>
     </ol>
     <figure class="screenshot">
-      <img src="../images/admin-rapports.png" alt="Page des rapports de développement" onerror="this.style.display='none'; this.parentElement.classList.add('placeholder')">
-      <figcaption>La page des rapports de développement périodiques</figcaption>
+      <img src="../images/admin-enfant-rapports.png" alt="Onglet Rapports de la fiche d'un enfant" onerror="this.style.display='none'; this.parentElement.classList.add('placeholder')">
+      <figcaption>L'onglet Rapports de la fiche de l'enfant</figcaption>
     </figure>
     <div class="tip">💡 Un rapport peut être supprimé et régénéré tant qu'il n'est pas finalisé — par exemple si des observations ont été ajoutées entre-temps.</div>
+    <p>Pour suivre l'avancement de la période, la section <span class="ui">Tous les rapports</span> offre la vue d'ensemble : tous les rapports du CPE avec leur statut (onglets <span class="ui">Brouillons</span> et <span class="ui">Finalisés</span>), leur livraison, et des filtres par nom, groupe et dates.</p>
+    <figure class="screenshot">
+      <img src="../images/admin-rapports.png" alt="Vue d'ensemble Tous les rapports" onerror="this.style.display='none'; this.parentElement.classList.add('placeholder')">
+      <figcaption>La vue d'ensemble « Tous les rapports »</figcaption>
+    </figure>
 
-    <h2 id="envoi">6. Envoyer aux parents et preuve d'envoi</h2>
-    <p>L'envoi aux parents est une action distincte, que vous déclenchez quand le rapport finalisé est prêt à partir.</p>
+    <h2 id="envoi">7. Envoyer aux parents et preuve d'envoi</h2>
+    <p>L'envoi aux parents est une action distincte, réservée aux administrateurs, et possible seulement une fois le rapport <span class="ui">Approuvé par un admin</span> (voir la section 6).</p>
     <ol class="steps">
-      <li>Sur le rapport finalisé, cliquez sur <span class="ui">Envoyer aux parents</span>.</li>
+      <li>Sur le rapport approuvé, cliquez sur <span class="ui">Envoyer aux parents</span>.</li>
       <li>La fenêtre <span class="ui">Envoyer le portrait aux parents</span> affiche les adresses courriel qui recevront le PDF en pièce jointe — celles inscrites dans la fiche de l'enfant. Vérifiez-les, puis confirmez avec <span class="ui">Envoyer</span>.</li>
       <li>Suivez la livraison directement sur le rapport : <span class="ui">Envoyé le…</span>, puis <span class="ui">Livré le…</span> une fois le courriel arrivé à destination. En cas d'<span class="ui">Échec de la livraison</span>, corrigez l'adresse dans la fiche de l'enfant et utilisez <span class="ui">Renvoyer</span>.</li>
     </ol>
+    <figure class="screenshot">
+      <img src="../images/admin-envoi-dialogue.png" alt="Fenêtre d'envoi du portrait aux parents" onerror="this.style.display='none'; this.parentElement.classList.add('placeholder')">
+      <figcaption>La fenêtre d'envoi : vérifiez les destinataires avant de confirmer</figcaption>
+    </figure>
     <p>Pour vos dossiers :</p>
     <ul>
       <li><span class="ui">Télécharger le PDF envoyé</span> — récupérez en tout temps le PDF exact qui a été transmis aux parents.</li>
@@ -120,21 +145,34 @@
       <figcaption>L'attestation d'envoi, imprimable pour vos dossiers</figcaption>
     </figure>
 
-    <h2 id="equipe">7. Gérer l'équipe</h2>
-    <p>La section <span class="ui">Équipe</span> (réservée aux propriétaires et administrateurs) liste le personnel du CPE : ajoutez vos éducatrices, gérez leurs accès et leurs rôles. C'est ici que vous donnez à une nouvelle éducatrice l'accès à l'application mobile. C'est aussi là que se définit le nom de l'<span class="ui">Établissement</span> affiché sur les rapports envoyés aux parents.</p>
+    <h2 id="equipe">8. Gérer l'équipe</h2>
+    <p>La section <span class="ui">Équipe</span> (visible pour les propriétaires et administrateurs) liste le personnel du CPE. C'est ici que vous donnez accès à l'application à une nouvelle éducatrice et que se définit le nom de l'<span class="ui">Établissement</span> affiché sur les rapports envoyés aux parents.</p>
+    <h3>Inviter une éducatrice ou un administrateur</h3>
+    <ol class="steps">
+      <li>Cliquez sur <span class="ui">Ajouter un membre</span>, entrez l'adresse courriel de la personne et choisissez son <span class="ui">Rôle</span> (<span class="ui">Éducateur(trice)</span> ou <span class="ui">Admin</span>), puis cliquez sur <span class="ui">Ajouter</span>.</li>
+      <li>La personne reçoit par courriel une invitation à s'inscrire, dont le lien mène au formulaire d'inscription du portail (le même qu'à la section 1, son courriel déjà rempli). En attendant, elle figure sous l'onglet <span class="ui">En attente</span> avec son <span class="ui">Rôle prévu</span>; elle passe à <span class="ui">Inscrit</span> une fois son compte créé.</li>
+      <li>Son compte est automatiquement rattaché à votre CPE avec le rôle choisi. Une éducatrice se connecte ensuite à l'application mobile avec ces mêmes identifiants.</li>
+    </ol>
+    <h3>Qui peut faire quoi dans cette section</h3>
+    <ul>
+      <li><strong>Propriétaire et admin</strong> — consulter la liste des membres (onglets <span class="ui">Actifs</span> et <span class="ui">En attente</span>) et modifier le nom de l'<span class="ui">Établissement</span>.</li>
+      <li><strong>Propriétaire seulement</strong> — <span class="ui">Ajouter un membre</span>, <span class="ui">Changer le rôle</span> d'un membre (<span class="ui">Éducateur(trice)</span> ou <span class="ui">Admin</span>) et <span class="ui">Retirer le membre</span>, y compris les invitations en attente.</li>
+      <li><strong>Éducatrice</strong> — n'a pas accès à cette section.</li>
+    </ul>
+    <div class="tip">💡 Garde-fou : le dernier membre ayant le rôle <span class="ui">Admin</span> ne peut être ni retiré ni rétrogradé en éducatrice, même par le propriétaire. Changez d'abord le rôle d'un autre membre pour Admin, puis refaites l'opération.</div>
     <figure class="screenshot">
       <img src="../images/admin-equipe.png" alt="Gestion de l'équipe" onerror="this.style.display='none'; this.parentElement.classList.add('placeholder')">
       <figcaption>La gestion de l'équipe</figcaption>
     </figure>
 
-    <h2 id="parametres">8. Paramètres du compte</h2>
-    <p>Depuis le menu de votre profil, ouvrez <span class="ui">Paramètres du compte</span> pour mettre à jour vos informations personnelles et votre mot de passe.</p>
+    <h2 id="parametres">9. Paramètres du compte</h2>
+    <p>Cliquez sur l'icône de profil en haut à droite de l'écran (encerclée ci-dessous), puis choisissez <span class="ui">Paramètres du compte</span>. Vous y définissez votre <span class="ui">Signature</span> — le nom qui apparaît sur les rapports envoyés aux parents et à côté de vos groupes. C'est aussi là que se trouve la suppression de compte (<span class="ui">Supprimer le compte</span>, une action irréversible).</p>
     <figure class="screenshot">
       <img src="../images/admin-parametres.png" alt="Paramètres du compte" onerror="this.style.display='none'; this.parentElement.classList.add('placeholder')">
       <figcaption>Les paramètres du compte</figcaption>
     </figure>
 
-    <h2 id="faq">9. Questions fréquentes</h2>
+    <h2 id="faq">10. Questions fréquentes</h2>
     <div class="faq">
       <details>
         <summary>Un parent n'a pas reçu le rapport par courriel.</summary>

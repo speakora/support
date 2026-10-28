@@ -4,6 +4,12 @@
  * Usage :
  *   ADMIN_URL=http://localhost:4001 ADMIN_EMAIL=... ADMIN_PASSWORD=... node scripts/screenshots.mjs
  *
+ * Variables optionnelles (passe « vue éducatrice » du guide de l'éducatrice) :
+ *   EDUC_EMAIL / EDUC_PASSWORD  compte démo avec le rôle éducateur
+ *   KID_ID                      enfant de démo (observations + grille remplies)
+ *   REPORT_ID                   rapport brouillon de cet enfant (onglet Modifier)
+ * Sans EDUC_EMAIL, la passe éducatrice est sautée.
+ *
  * Prérequis : npm install (dans scripts/), et le portail + backend en marche.
  * Les images sont écrites dans ../images/ avec les noms référencés par les guides.
  *
@@ -15,6 +21,10 @@ import { chromium } from 'playwright';
 const ADMIN_URL = process.env.ADMIN_URL ?? 'http://localhost:4001';
 const EMAIL = process.env.ADMIN_EMAIL;
 const PASSWORD = process.env.ADMIN_PASSWORD;
+const EDUC_EMAIL = process.env.EDUC_EMAIL;
+const EDUC_PASSWORD = process.env.EDUC_PASSWORD;
+const KID_ID = process.env.KID_ID;
+const REPORT_ID = process.env.REPORT_ID;
 
 if (!EMAIL || !PASSWORD) {
   console.error('ADMIN_EMAIL et ADMIN_PASSWORD sont requis.');
@@ -36,10 +46,14 @@ const SHOTS = [
 ];
 
 const browser = await chromium.launch();
-const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+let failures = 0;
+
+const imagePath = (name) => new URL(`../images/${name}.png`, import.meta.url).pathname;
 
 // Force le portail en français (les guides référencent les libellés français).
-await page.addInitScript(() => {
+// Deux clés : 'app-settings' (réglages de l'app) et 'i18nextLng' (cache du
+// détecteur de langue, prioritaire au démarrage).
+function forceFrench() {
   const KEY = 'app-settings';
   let settings = {};
   try {
@@ -48,34 +62,129 @@ await page.addInitScript(() => {
     /* valeur corrompue : on repart à neuf */
   }
   localStorage.setItem(KEY, JSON.stringify({ ...settings, language: 'fr' }));
-});
+  localStorage.setItem('i18nextLng', 'fr');
+}
 
-console.log(`Connexion à ${ADMIN_URL}…`);
-await page.goto(`${ADMIN_URL}/auth/auth0/sign-in`);
-await page.fill('input[name="emailOrUsername"]', EMAIL);
-await page.fill('input[name="password"]', PASSWORD);
-await page.click('button[type="submit"]');
-await page.waitForURL('**/dashboard**', { timeout: 30_000 });
-console.log('Connecté.');
+async function newFrenchPage() {
+  const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+  await page.addInitScript(forceFrench);
+  return page;
+}
 
-let failures = 0;
-for (const shot of SHOTS) {
-  // 2 essais : juste après la connexion, la première navigation peut être
-  // interrompue par la redirection de l'app (net::ERR_ABORTED).
+async function login(page, email, password) {
+  await page.goto(`${ADMIN_URL}/auth/auth0/sign-in`);
+  await page.fill('input[name="emailOrUsername"]', email);
+  await page.fill('input[name="password"]', password);
+  await page.click('button[type="submit"]');
+  await page.waitForURL('**/dashboard**', { timeout: 30_000 });
+}
+
+// 2 essais : juste après la connexion, la première navigation peut être
+// interrompue par la redirection de l'app (net::ERR_ABORTED).
+async function capture(name, fn) {
   for (let attempt = 1; attempt <= 2; attempt += 1) {
     try {
-      await page.goto(`${ADMIN_URL}${shot.path}`, { waitUntil: 'networkidle' });
-      await page.waitForTimeout(800); // laisse finir les animations/chargements
-      await page.screenshot({ path: new URL(`../images/${shot.name}.png`, import.meta.url).pathname });
-      console.log(`✓ ${shot.name}.png`);
-      break;
+      await fn();
+      await new Promise((r) => setTimeout(r, 800)); // laisse finir animations/chargements
+      return true;
     } catch (err) {
       if (attempt === 2) {
         failures += 1;
-        console.error(`✗ ${shot.name} (${shot.path}) : ${err.message}`);
+        console.error(`✗ ${name} : ${err.message}`);
       }
     }
   }
+  return false;
+}
+
+// ---------------------------------------------------------------------------
+// Passe admin : page d'inscription + pages du portail (compte démo admin).
+// ---------------------------------------------------------------------------
+const page = await newFrenchPage();
+
+// Page d'inscription : publique, à capturer avant la connexion (une fois
+// connecté, les pages /auth redirigent vers le tableau de bord).
+// Double visite obligatoire : au premier chargement, l'app réinitialise
+// 'app-settings' aux valeurs par défaut (langue 'en') car la valeur injectée
+// n'a pas de champ version; à la navigation suivante, le script d'init
+// fusionne 'fr' dans des réglages désormais valides.
+await page.goto(`${ADMIN_URL}/auth/auth0/sign-up`, { waitUntil: 'networkidle' });
+await page.goto(`${ADMIN_URL}/auth/auth0/sign-up`, { waitUntil: 'networkidle' });
+await page.waitForTimeout(800);
+await page.screenshot({ path: imagePath('admin-inscription') });
+console.log('✓ admin-inscription.png');
+
+console.log(`Connexion à ${ADMIN_URL}…`);
+await login(page, EMAIL, PASSWORD);
+console.log('Connecté.');
+
+for (const shot of SHOTS) {
+  const ok = await capture(shot.name, async () => {
+    await page.goto(`${ADMIN_URL}${shot.path}`, { waitUntil: 'networkidle' });
+  });
+  if (ok) {
+    await page.screenshot({ path: imagePath(shot.name) });
+    console.log(`✓ ${shot.name}.png`);
+  }
+}
+await page.close();
+
+// ---------------------------------------------------------------------------
+// Passe éducatrice : mêmes pages vues avec le rôle éducateur (menu sans
+// Équipe/Code QR) + écrans du flux de rapport, pour le guide de l'éducatrice.
+// ---------------------------------------------------------------------------
+if (EDUC_EMAIL && EDUC_PASSWORD) {
+  const educ = await newFrenchPage();
+  console.log(`Connexion éducatrice à ${ADMIN_URL}…`);
+  await login(educ, EDUC_EMAIL, EDUC_PASSWORD);
+  console.log('Connectée.');
+
+  if (await capture('educ-dashboard', async () => {
+    await educ.goto(`${ADMIN_URL}/dashboard`, { waitUntil: 'networkidle' });
+  })) {
+    await educ.screenshot({ path: imagePath('educ-dashboard') });
+    console.log('✓ educ-dashboard.png');
+  }
+
+  if (KID_ID) {
+    if (await capture('educ-grille', async () => {
+      await educ.goto(`${ADMIN_URL}/dashboard/kids/${KID_ID}?tab=grille`, { waitUntil: 'networkidle' });
+    })) {
+      await educ.screenshot({ path: imagePath('educ-grille') });
+      console.log('✓ educ-grille.png');
+    }
+
+    // Dialogue « Générer un rapport de développement » : ouvert depuis
+    // l'onglet Rapports, capturé, puis refermé avec Échap.
+    if (await capture('educ-generer', async () => {
+      await educ.goto(`${ADMIN_URL}/dashboard/kids/${KID_ID}?tab=reports`, { waitUntil: 'networkidle' });
+      await educ.getByRole('button', { name: 'Générer un rapport' }).first().click();
+      await educ.getByRole('dialog').waitFor();
+    })) {
+      await educ.screenshot({ path: imagePath('educ-generer') });
+      await educ.keyboard.press('Escape');
+      console.log('✓ educ-generer.png');
+    }
+  } else {
+    console.log('KID_ID absent : educ-grille et educ-generer sautées.');
+  }
+
+  if (KID_ID && REPORT_ID) {
+    // L'onglet Modifier du rapport n'est pas adressable par URL : on clique.
+    if (await capture('educ-modifier', async () => {
+      await educ.goto(`${ADMIN_URL}/dashboard/kids/${KID_ID}/reports/${REPORT_ID}`, { waitUntil: 'networkidle' });
+      await educ.getByRole('tab', { name: 'Modifier' }).click();
+    })) {
+      await educ.screenshot({ path: imagePath('educ-modifier') });
+      console.log('✓ educ-modifier.png');
+    }
+  } else {
+    console.log('REPORT_ID absent : educ-modifier sautée.');
+  }
+
+  await educ.close();
+} else {
+  console.log('EDUC_EMAIL absent : passe éducatrice sautée (educ-*.png inchangées).');
 }
 
 await browser.close();

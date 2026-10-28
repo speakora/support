@@ -168,6 +168,17 @@ header nav {
     border-top: 1px solid #EFEFEF;
 }
 
+/* En-têtes de partie (guides découpés en plusieurs parties) */
+.guide h2.part {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #343432;
+    border-top: 3px solid #AAC527;
+    margin-top: 4rem;
+    padding-top: 1.25rem;
+}
+
 .guide h3 {
     font-size: 1.1rem;
     margin-top: 1.5rem;
@@ -198,6 +209,10 @@ header nav {
 
 .toc ol {
     padding-left: 1.25rem;
+}
+
+.toc ol + strong {
+    margin-top: 1rem;
 }
 
 .toc a {
